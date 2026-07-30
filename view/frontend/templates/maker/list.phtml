@@ -98,4 +98,30 @@ $character = array("All","A","B","C","D","E","F","G","H","I","J","K","L","M","N"
             }
         }
     });
+
+    jQuery("#maker-form").on("submit", function(e){
+        e.preventDefault();
+        var searchVal = jQuery("#maker-search").val().toLowerCase().trim();
+        jQuery(".makers ul li").removeClass("active");
+        if(searchVal == ""){
+            jQuery(".makers ul li.All").addClass("active");
+            jQuery(".ict-shopbybrand-maker-list-item").addClass("active");
+        } else {
+            jQuery(".makers ul li.All").addClass("active");
+            jQuery(".ict-shopbybrand-maker-list-item").each(function(){
+                var name = jQuery(this).find("span").text().toLowerCase();
+                if(name.indexOf(searchVal) !== -1){
+                    jQuery(this).addClass("active");
+                } else {
+                    jQuery(this).removeClass("active");
+                }
+            });
+        }
+    });
+
+    // Real click lands on the wrapper div, not the submit input directly
+    jQuery(".search-input.active").on("click", function(e){
+        e.preventDefault();
+        jQuery("#maker-form").trigger("submit");
+    });
 </script>

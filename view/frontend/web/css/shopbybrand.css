@@ -1,0 +1,301 @@
+/**
+ * Shopbybrand Original PDF Compatible Stylesheet
+ */
+
+/* Brand List Page - Top Gray Search Box */
+.makers .search-makers-wrapper,
+.makers .search-makers {
+    background-color: #b5b5b5;
+    padding: 35px 25px;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.makers .search-input-box {
+    position: relative;
+    width: 100%;
+}
+
+.makers .search-input-box input#maker-search {
+    width: 100%;
+    height: 42px;
+    padding: 8px 45px 8px 15px;
+    font-size: 14px;
+    border: 1px solid #d0d0d0;
+    border-radius: 0;
+    background: #ffffff;
+    color: #333333;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.makers .search-input-box button#maker-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    color: #777777;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.makers .search-input-box button#maker-button:hover {
+    color: #0088cc;
+}
+
+/* Brand List Page - Single Row Alphabet Bar */
+.makers-alphabet-bar,
+.makers ul.alphabet-list,
+.makers ul {
+    margin-bottom: 25px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 3px;
+}
+
+.makers-alphabet-bar ul.alphabet-list li.char-item,
+.makers ul li {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    min-width: auto;
+    height: auto;
+    border: none;
+    background: transparent;
+}
+
+.makers-alphabet-bar ul.alphabet-list li.char-item a,
+.makers ul li a {
+    display: inline-block;
+    padding: 3px 8px;
+    font-size: 12px;
+    line-height: 1.4;
+    color: #555555;
+    text-decoration: none;
+    border: 1px solid #e0e0e0;
+    background: #ffffff;
+    border-radius: 2px;
+    text-transform: uppercase;
+    box-sizing: border-box;
+}
+
+.makers-alphabet-bar ul.alphabet-list li.char-item.char-All a,
+.makers ul li.All a,
+.makers-alphabet-bar ul.alphabet-list li.char-item.active a,
+.makers ul li.active a {
+    background: #0088cc;
+    color: #ffffff;
+    border-color: #0088cc;
+    font-weight: 600;
+}
+
+.makers-alphabet-bar ul.alphabet-list li.char-item.enable a:hover,
+.makers ul li#enable a:hover {
+    border-color: #0088cc;
+    color: #0088cc;
+}
+
+.makers-alphabet-bar ul.alphabet-list li.char-item.disable a,
+.makers ul li#disable a {
+    color: #cccccc;
+    border-color: #f0f0f0;
+    background: #fafafa;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Brand Grid List - 5 Columns Clean Minimalist (No Boxes) */
+.ict-shopbybrand-makers-list-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px 20px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 991px) {
+    .ict-shopbybrand-makers-list-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .ict-shopbybrand-makers-list-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.ict-shopbybrand-maker-list-item.brand-card,
+.ict-shopbybrand-maker-list-item {
+    text-align: center;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+}
+
+.ict-shopbybrand-maker-list-item .ict-shopbybrand-inner a {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0;
+}
+
+.ict-shopbybrand-maker-list-item .brand-img-box,
+.ict-shopbybrand-maker-list-item img {
+    max-height: 80px;
+    max-width: 100%;
+    object-fit: contain;
+    margin: 0 auto 8px auto;
+    border: none;
+    box-shadow: none;
+}
+
+.ict-shopbybrand-maker-list-item .brand-title,
+.ict-shopbybrand-maker-list-item span {
+    font-size: 13px;
+    color: #0088cc;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.no-brands-msg {
+    padding: 20px;
+    text-align: center;
+    color: #666666;
+    font-size: 14px;
+}
+
+/* Left Sidebar Widget - Clean Uppercase Text List */
+.shopbybrand-left,
+.block.block-brand-filter.shopbybrand-left {
+    margin-bottom: 25px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+}
+
+.shopbybrand-left .filter-title,
+.shopbybrand-left .block-title,
+.shopbybrand-left strong.filter-subtitle {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #333333;
+    margin-bottom: 12px;
+    display: block;
+    letter-spacing: 0.5px;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.shopbybrand-left .block-content {
+    padding: 0;
+}
+
+.shopbybrand-left ul,
+.shopbybrand-left ul.brand-filter-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.shopbybrand-left ul li,
+.shopbybrand-left ul li.brand-filter-item {
+    padding: 8px 0;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.shopbybrand-left ul li a {
+    font-size: 11px;
+    color: #333333;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.shopbybrand-left ul li a:hover {
+    color: #0088cc;
+}
+
+/* PDP Page - Brand Section */
+.block-content.content.product-shopbybrand {
+    margin: 15px 0;
+    padding: 0;
+}
+
+.block-content.content.product-shopbybrand h2 {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    color: #333333;
+}
+
+.block-content.content.product-shopbybrand .item-count {
+    font-size: 12px;
+    color: #666666;
+    margin-bottom: 15px;
+}
+
+.pdp-brand-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 25px 20px;
+    text-align: center;
+    margin-top: 15px;
+}
+
+@media (max-width: 768px) {
+    .pdp-brand-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.pdp-brand-item {
+    border: none;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    min-width: auto;
+    text-align: center;
+}
+
+.pdp-brand-item a {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pdp-brand-img-box {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pdp-brand-img-box img {
+    max-height: 65px;
+    max-width: 100%;
+    object-fit: contain;
+    margin-bottom: 6px;
+}
+
+.pdp-brand-name {
+    font-size: 13px;
+    color: #0088cc;
+}
