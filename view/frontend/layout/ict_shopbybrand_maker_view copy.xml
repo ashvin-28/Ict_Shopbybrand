@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Ict Team
+ * @copyright Copyright (c) 2017 Ict (http://icreativetechnologies.com/)
+ * @package Ict_Shopbybrand
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd" ifconfig="ict_shopbybrand/maker/enabled" >
+    <body>
+        <referenceBlock name="content">
+            <block class="Ict\Shopbybrand\Block\Maker\ViewMaker" name="ict_shopbybrand.maker.view" template="Ict_Shopbybrand::maker/view.phtml" />
+   
+                <block class="Ict\Shopbybrand\Block\Maker\ViewMaker\Catalog\Product" template="Magento_Catalog::product/list.phtml" ifconfig="ict_shopbybrand/maker/enabled" group="tabs" name="ict_shopbybrand.maker.view.product">
+                    <block class="Magento\Catalog\Block\Product\ProductList\Toolbar" name="product_list_toolbar" template="product/list/toolbar.phtml">
+                        <block class="Magento\Theme\Block\Html\Pager" name="product_list_toolbar_pager"/>
+                    </block>
+                    <action method="setToolbarBlockName">
+                        <argument name="name" xsi:type="string">product_list_toolbar</argument>
+                    </action>
+   
+            </block>
+        </referenceBlock>
+    </body>
+</page>

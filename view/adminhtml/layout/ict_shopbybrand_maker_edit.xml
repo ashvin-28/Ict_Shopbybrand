@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Ict Team
+ * @copyright Copyright (c) 2017 Ict (http://icreativetechnologies.com/)
+ * @package Ict_Shopbybrand
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Magento_Catalog::catalog/category-selector.css"/>
+    </head>
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Ict\Shopbybrand\Block\Adminhtml\Maker\Edit" name="ict_shopbybrand_maker_edit" ifconfig="ict_shopbybrand/maker/enabled"/>
+            <block class="Magento\Catalog\Block\Adminhtml\Product\Edit\NewCategory" name="new-category" ifconfig="ict_shopbybrand/maker/enabled" template="Magento_Catalog::catalog/product/edit/category/new/form.phtml"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Ict\Shopbybrand\Block\Adminhtml\Maker\Edit\Tabs" name="ict_shopbybrand_maker_tabs" ifconfig="ict_shopbybrand/maker/enabled">
+                <block class="Ict\Shopbybrand\Block\Adminhtml\Maker\Edit\Tab\Maker" name="ict_shopbybrand_maker_edit_tab_maker"/>
+                <block class="Ict\Shopbybrand\Block\Adminhtml\Maker\Edit\Tab\Stores" name="ict_shopbybrand_maker_edit_tab_maker_stores"/>
+                <block class="Ict\Shopbybrand\Block\Adminhtml\Maker\Edit\Tab\Product" name="ict_shopbybrand_maker_edit_tab_maker_product"/>
+                <block class="Ict\Shopbybrand\Block\Adminhtml\Maker\Edit\Tab\Category" name="ict_shopbybrand_maker_edit_tab_maker_category"/> 
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">maker</argument>
+                    <argument name="block" xsi:type="string">ict_shopbybrand_maker_edit_tab_maker</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">stores</argument>
+                    <argument name="block" xsi:type="string">ict_shopbybrand_maker_edit_tab_maker_stores</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">product</argument>
+                    <argument name="block" xsi:type="string">ict_shopbybrand_maker_edit_tab_maker_product</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">categories</argument>
+                    <argument name="block" xsi:type="string">ict_shopbybrand_maker_edit_tab_maker_category</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

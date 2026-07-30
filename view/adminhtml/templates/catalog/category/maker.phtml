@@ -1,0 +1,81 @@
+<?php 
+/**
+ * @author Ict Team
+ * @copyright Copyright (c) 2017 Ict (http://icreativetechnologies.com/)
+ * @package Ict_Shopbybrand
+ */
+?>
+<?php /** @var \Ict\Shopbybrand\Block\Adminhtml\Catalog\Category\Tab\Maker $this */?>
+
+<?php echo $this->getChildHtml() ?>
+<div class="no-display">
+    <input type="hidden" name="category_ict_shopbybrand_makers" id="in_category_ict_shopbybrand_makers" value=""/>
+</div>
+<?php if(($block = $this->getLayout()->getBlock('category.ict_shopbybrand.maker.grid')) && ($_gridJsObject = $block->getJsObjectName())): ?>
+    <script type="text/javascript">
+        require([
+            "mage/adminhtml/grid"
+        ], function(){
+            var categoryIctShopbybrandMakers = $H(<?php echo json_encode($block->getSelectedMakers()) ?>);
+            $('in_category_ict_shopbybrand_makers').value = Object.toJSON(categoryIctShopbybrandMakers);
+
+            function registerCategoryIctShopbybrandMaker(grid, element, checked){
+                if(checked){
+                    if(element.positionElement){
+                        element.positionElement.disabled = false;
+                        categoryIctShopbybrandMakers.set(element.value, element.positionElement.value);
+                    }
+                }
+                else{
+                    if(element.positionElement){
+                        element.positionElement.disabled = true;
+                    }
+                    categoryIctShopbybrandMakers.unset(element.value);
+                }
+                $('in_category_ict_shopbybrand_makers').value = Object.toJSON(categoryIctShopbybrandMakers);
+                grid.reloadParams = {'category_ict_shopbybrand_makers[]':categoryIctShopbybrandMakers.keys()};
+            }
+            function categoryIctShopbybrandMakerRowClick(grid, event){
+
+                var trElement = Event.findElement(event, 'tr');
+                var isInput   = Event.element(event).tagName == 'INPUT';
+                if(trElement){
+                    var checkbox = Element.getElementsBySelector(trElement, 'input');
+                    if(checkbox[0]){
+                        var checked = isInput ? checkbox[0].checked : !checkbox[0].checked;
+                        <?php echo $_gridJsObject ?>.setCheckboxChecked(checkbox[0], checked);
+                    }
+                }
+            }
+            function ictShopbybrandMakerPositionChange(event){
+                var element = Event.element(event);
+                if(element && element.checkboxElement && element.checkboxElement.checked){
+                    categoryIctShopbybrandMakers.set(element.checkboxElement.value, element.value);
+                    $('in_category_ict_shopbybrand_makers').value = Object.toJSON(categoryIctShopbybrandMakers);
+                }
+            }
+
+            var tabIndex = 1000;
+            function categoryIctShopbybrandMakerRowInit(grid, row){
+                var checkbox = $(row).getElementsByClassName('checkbox')[0];
+                var position = $(row).getElementsByClassName('input-text')[0];
+                if(checkbox && position){
+                    checkbox.positionElement = position;
+                    position.checkboxElement = checkbox;
+                    position.disabled = !checkbox.checked;
+                    position.tabIndex = tabIndex++;
+                    Event.observe(position,'keyup',ictShopbybrandMakerPositionChange);
+                }
+            }
+
+
+            <?php echo $_gridJsObject ?>.rowClickCallback = categoryIctShopbybrandMakerRowClick;
+            <?php echo $_gridJsObject ?>.initRowCallback = categoryIctShopbybrandMakerRowInit;
+            <?php echo $_gridJsObject ?>.checkboxCheckCallback = registerCategoryIctShopbybrandMaker;
+            <?php echo $_gridJsObject ?>.rows.each(function(row){
+                categoryIctShopbybrandMakerRowInit(<?php echo $_gridJsObject ?>, row)
+            });
+        });
+
+    </script>
+<?php endif;?>

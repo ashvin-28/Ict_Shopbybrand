@@ -1,0 +1,26 @@
+<?php /** @var \Ict\Shopbybrand\Block\Maker\ViewMaker $this */?>
+<?php
+/**
+ * @author Ict Team
+ * @copyright Copyright (c) 2017 Ict (http://icreativetechnologies.com/)
+ * @package Ict_Shopbybrand
+ */
+?>
+<?php /** @var \Ict\Shopbybrand\Model\Maker $_maker */?>
+<?php $_maker = $this->getCurrentMaker();?>
+<?php 
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $scopeConfig = $objectManager->create('Magento\Framework\App\Config\ScopeConfigInterface');
+    $enable = $scopeConfig->getValue('ict_shopbybrand/maker/banners');
+    
+    ?>
+<?php if($enable){ ?>
+<div class="maker-view">
+    <div class="banner">
+        <img src="<?php echo $this->getBaseUrl().$_maker->getLogobanner();  ?>">
+    </div>
+    <div class="banner-text">
+        <p class="texts"><?php echo __($_maker->getBannerText()); ?></p>
+    </div>
+</div>
+<?php } ?>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Ict Team
+ * @copyright Copyright (c) 2017 Ict (http://icreativetechnologies.com/)
+ * @package Ict_Shopbybrand
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <update handle="ict_shopbybrand_maker_grid_block"/>
+    <body>
+        <block class="Magento\Backend\Block\Widget\Grid\Container" name="ict_shopbybrand_maker.grid.container" template="Magento_Backend::widget/grid/container/empty.phtml" ifconfig="ict_shopbybrand/maker/enabled"/>
+    </body>
+</page>

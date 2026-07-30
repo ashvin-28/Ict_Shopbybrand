@@ -1,0 +1,21 @@
+{
+    "name": "ict/module-shopbybrand",
+    "description": "Ict_Shopbybrand",
+    "require": {
+      "php": "~8.3.0||~8.4.0||~8.5.0"
+    },
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Ict\\Shopbybrand\\": ""
+        }
+    }
+}

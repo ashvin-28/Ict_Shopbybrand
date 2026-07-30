@@ -1,0 +1,75 @@
+Syetem Configuration
+	
+#1 Extension enable/disable module
+
+#2 Select Domain Type
+
+#3 Add licence key 
+
+#4 Enable/Disable breadcrumb
+
+#5 Enable/Disable featured brand slider on home page
+
+#6 Enable/Disable brand slider on category page
+
+#7 Enable/Disable filter by brand on layered navigation
+
+#8 Enable/Disable search by brand on list page
+
+#9 Enable/Disable Alphabetic search on list page
+
+#10 Enable/Disable brand banner and text on view brand page
+
+#11 Add shopbybrand list url
+
+#12 Add shopbybrand url prefix
+
+#13 Add shopbybrand url suffix
+
+Frontend
+
+#1 Display Shopbybrand Menu in Menu navigation
+
+#2 Display featured brand slider on home page.
+
+#3 Display featured brand slider on home page.
+
+#4 List of all brand page
+
+#5 Search filter on list all brand page
+
+#6 Alphabetic search on list all brand page
+
+#7 List of all brands on layered navigation
+
+#8 View brand page with banner text and selected products with pagination
+
+#9 View brands tab on product detail page with pagination
+
+
+Adminpanel
+
+#1 Display menu and submenu with links
+
+#2 List of all brands with edit and delete options
+
+#3 Set filteration on grid panel
+
+#4 Set action enable, disable and delete functionality on grid
+
+#5 Add/Edit brands with name, url, logo, banner etc.
+
+#6 Select stores, products and categories while create brands.
+
+#7 Create new category functionality on category tab while selecting categories.
+
+#9 Import/Export brands using CSV
+
+
+#Note : 
+
+-> Put sample_brands CSV file on below root path :
+	- pub\media\ict\sample\
+
+-> For the import brands you should create below path folder and put all brands logo and banners
+	- pub\media\ict\import\

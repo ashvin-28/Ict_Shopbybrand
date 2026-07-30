@@ -1,0 +1,44 @@
+<?php /** @var \Sample\News\Block\Catalog\Category\ListAuthor $this */?>
+<?php 
+/**
+ * @author Ict Team
+ * @copyright Copyright (c) 2017 Ict (http://icreativetechnologies.com/)
+ * @package Ict_Shopbybrand
+ */
+?>
+<?php 
+	$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+	$scopeConfig = $objectManager->create('Magento\Framework\App\Config\ScopeConfigInterface');
+	$enable = $scopeConfig->getValue('ict_shopbybrand/maker/cateshopbybrand');
+if($enable){ 
+?>
+
+<?php $_makers = $this->getMakerCollection();?>
+
+<?php if ($_makers && $_makers->count() > 0) :?>
+	<div class="brand-container">
+		<div class="title"><h1><?php echo __('Shopbybrand') ?></h1></div>
+		<div id="demo">
+			<div id="owl-demo" class="owl-carousels">
+				<?php foreach ($_makers as $_maker) : ?>
+					<div class="item">
+                    	<a href="<?php echo $_maker->getMakerUrl();?>">
+                    		<img src="<?php echo $this->getBaseUrl().$_maker->getAvatar();  ?>">
+                    	</a>
+                  </div>
+				<?php endforeach;?>
+			</div>
+		</div>
+	</div>
+	  	<script type="text/javascript">
+	    jQuery(document).ready(function() {
+	        var owl = jQuery("#owl-demo");
+	        owl.owlCarousel({
+	          autoPlay: 3000,
+	          navigation : true,
+	          items : 6
+	        });
+      	});
+	   </script>
+<?php endif;?>
+<?php } ?>

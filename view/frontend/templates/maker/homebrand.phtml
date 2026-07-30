@@ -1,0 +1,45 @@
+<?php /** @var Ict\Shopbybrand\Block\Maker\ListMaker $this */ ?>
+<?php 
+/**
+ * @author Ict Team
+ * @copyright Copyright (c) 2017 Ict (http://icreativetechnologies.com/)
+ * @package Ict_Shopbybrand
+ */
+?>
+<?php 
+
+if($this->getIsFeatured()){
+  if ($this->getFullActionName() == 'cms_index_index') {
+  ?>
+  <?php $_makers = $this->getMakers(); ?>
+  <?php if (count($_makers->getData()) > 0) :?>
+  <div class="brand-container">
+  <div class="title"><h1><?php echo __('Shopbybrand') ?></h1></div>
+  <div id="demo">
+          <div id="owl-demo" class="owl-carousels">
+              <?php foreach ($_makers as $_maker) : ?>
+                  <div class="item">
+                      <a href="<?php echo $_maker->getMakerUrl();?>">
+                        <img src="<?php echo $this->getBaseUrl().$_maker->getAvatar();  ?>">
+                      </a>
+                  </div>
+              <?php endforeach;?>
+          </div>
+  </div>
+  </div>
+  <?php endif;?>
+
+  <script type="text/javascript">
+   jQuery(document).ready(function() {
+        var owl = jQuery("#owl-demo");
+        owl.owlCarousel({
+         
+          autoPlay: 3000,
+          navigation : true,
+          items : 6
+        });
+      });
+  </script>
+
+  <?php  } ?>
+  <?php  } ?>

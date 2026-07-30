@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Ict Team
+ * @copyright Copyright (c) 2017 Ict (http://icreativetechnologies.com/)
+ * @package Ict_Shopbybrand
+ */
+-->
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/layout_generic.xsd">
+    <container name="root" label="Root">
+        <block class="Ict\Shopbybrand\Block\Adminhtml\Maker\Edit\Tab\Product" name="maker.edit.tab.product" ifconfig="ict_shopbybrand/maker/enabled"/>
+    </container>
+</layout>

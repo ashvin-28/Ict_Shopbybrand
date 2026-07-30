@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Ict Team
+ * @copyright Copyright (c) 2017 Ict (http://icreativetechnologies.com/)
+ * @package Ict_Shopbybrand
+ */
+-->
+<page layout="3columns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+		<link src="jquery/jquery.min.js"/>
+		<link src="Ict_Shopbybrand/js/owl.carousel.js"/>
+        <css src="Ict_Shopbybrand/css/owl.carousel.css"/>
+	</head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\FormKey" name="formkey"/>
+            <block class="Ict\Shopbybrand\Block\Maker\Homebrand" after="-" name="brandcollection" as="brandcollection" ifconfig="ict_shopbybrand/maker/enabled" template="Ict_Shopbybrand::maker/homebrand.phtml"/>
+        </referenceContainer>
+
+    </body>
+</page>

@@ -1,0 +1,38 @@
+<?php
+global $postData;
+
+$postData = $block->getCategoryIds();
+
+function categoryLoop($id) {
+	
+	global $postData;
+
+	$postCatArray = explode(',', $postData);
+	
+	$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+	
+	$categories = $objectManager->create('Magento\Catalog\Model\Category')->load($id);
+
+	if ($categories->hasChildren()) { ?>
+		<ul>
+		<?php
+		$subcategories = explode(',', $categories->getChildren());
+		foreach ($subcategories as $category) {
+			$subcategory = $objectManager->create('Magento\Catalog\Model\Category')->load($category); ?>
+			<li>
+			<div class="category-item">
+			<span class="checkbox-input">
+			<input type='checkbox' class='category-checkbox' value="<?php echo $category ?>" <?php if (in_array($category, $postCatArray)){ echo 'checked'; } ?> /></span>
+			
+			<span class="cat-name">
+			<?php echo $subcategory->getName(); ?>
+			</span>
+			</div>
+			</li>
+			<?php if ($subcategory->hasChildren()) { echo "<li>"; categoryLoop($category); echo "</li>"; }
+		}?>
+		</ul>
+	<?php }
+}
+
+categoryLoop(2);

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Ict Team
+ * @copyright Copyright (c) 2017 Ict (http://icreativetechnologies.com/)
+ * @package Ict_Shopbybrand
+ */
+-->
+<page layout="2columns-left" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Ict\Shopbybrand\Block\Maker\ListMaker" name="list-makers" ifconfig="ict_shopbybrand/maker/enabled" template="Ict_Shopbybrand::maker/list.phtml" />
+        </referenceContainer>
+        <referenceContainer name="sidebar.additional">
+            <block class="Ict\Shopbybrand\Block\Maker\ListMaker" name="search-makers" ifconfig="ict_shopbybrand/maker/enabled" template="Ict_Shopbybrand::maker/search.phtml" before="-" />
+        </referenceContainer>
+       <!--  <referenceBlock name="page.main.title">
+            <block class="Ict\Shopbybrand\Block\Maker\ListMaker\Rss\Link" name="maker.rss.link" template="Ict_Shopbybrand::rss/link.phtml"/>
+        </referenceBlock> -->
+    </body>
+
+</page>

@@ -1,0 +1,26 @@
+<?php /** @var \Ict\Shopbybrand\Block\Catalog\Product\ListMaker $this */?>
+<?php 
+/**
+ * @author Ict Team
+ * @copyright Copyright (c) 2017 Ict (http://icreativetechnologies.com/)
+ * @package Ict_Shopbybrand
+ */
+?>
+<?php $_makers = $this->getMakerCollection();?>
+<?php if ($_makers && $_makers->count() > 0) :?>
+    <div class="block-content content product-shopbybrand">
+        <h2><?php echo __('Shopbybrand')?></h2>
+        <?php /** @var \Ict\Shopbybrand\Model\Maker $_maker */?>
+        <div><?php echo $this->getPagerHtml();?></div>
+        <div style="clear:both"></div>
+        <?php foreach ($_makers as $_maker) : ?>
+            <div class="item">
+                <a href="<?php echo $_maker->getMakerUrl();?>">
+                 <img src="<?php echo $this->getBaseUrl().$_maker->getAvatar();  ?>"></a>
+                 <?php echo $_maker->getName();?>
+            </div>
+        <?php endforeach; ?>
+        <div><?php echo $this->getPagerHtml();?></div>
+        <div style="clear:both"></div>
+    </div>
+<?php endif;?>

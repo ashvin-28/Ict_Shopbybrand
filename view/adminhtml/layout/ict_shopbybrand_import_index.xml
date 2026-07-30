@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Ict Team
+ * @copyright Copyright (c) 2017 Ict (http://icreativetechnologies.com/)
+ * @package Ict_Shopbybrand
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+        	<block class="Ict\Shopbybrand\Block\Adminhtml\Import\Edit\Before" template="Ict_Shopbybrand::import/form/before.phtml" name="import.form.before" as="form_before"/>
+            <block class="Ict\Shopbybrand\Block\Adminhtml\Import\Edit" name="import.form.container"/>
+            <block class="Ict\Shopbybrand\Block\Adminhtml\Form\After" template="Ict_Shopbybrand::import/form/after.phtml" name="import.form.after" as="form_after"/>
+        </referenceContainer>
+    </body>
+</page>

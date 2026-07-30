@@ -1,0 +1,101 @@
+<?php /** @var Ict\Shopbybrand\Block\Maker\ListMaker $this */ ?>
+<?php
+/**
+ * @author Ict Team
+ * @copyright Copyright (c) 2017 Ict (http://icreativetechnologies.com/)
+ * @package Ict_Shopbybrand
+ */
+?>
+<?php $_makers = $this->getMakers(); ?>
+<?php $char = array();
+
+$character = array("All","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"); ?>
+<div class="makers">
+    <?php 
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $scopeConfig = $objectManager->create('Magento\Framework\App\Config\ScopeConfigInterface');
+    $enable = $scopeConfig->getValue('ict_shopbybrand/maker/searchshopbybrand');
+    if($enable){
+    ?>
+    <div class="search-makers">
+    <form class="maker-form" method="post" id="maker-form" action="">
+        <div class="search-input">
+            <input type="text" name="maker-search" placeholder="Search brand here..." id="maker-search" value="<?php echo $this->getRequest()->getPost("maker-search"); ?>" />
+        </div>
+        <div class="search-input active">
+            <input type="submit" name="maker-button" value="Search" />
+        </div>
+    </form>
+    </div>
+    <?php } ?>
+    <?php
+    $enables = $scopeConfig->getValue('ict_shopbybrand/maker/charshopbybrand');
+    if($enables){
+     ?>
+        <?php foreach ($_makers as $maker) {
+            array_push($char, substr($maker->getName(), 0, 1));
+        }
+        array_unique($char); ?>
+        <ul>
+        <?php foreach ($character as $key) { 
+            if(in_array($key,$char)){  ?>
+                <li class="<?php echo $key; ?>" id="enable"><a href="javascript:void(0)"><?php echo $key; ?></a></li>
+            <?php } else { ?>
+                <?php if($key == "All"){ ?>
+                    <li class="<?php echo $key; ?> active" id="active"><a href="javascript:void(0)"><?php echo $key; ?></a></li>
+                <?php } else { ?>
+                    <li class="<?php echo $key; ?>" id="disable"><a href="javascript:void(0)"><?php echo $key; ?></a></li>
+                <?php } ?>
+            <?php } ?>
+        <?php } ?>
+        </ul>
+    <?php } ?>
+    <?php if ($_makers->getSize() > 0) :?>
+        <!-- <div class="ict-shopbybrand-makers-toolbar toolbar top"><?php //echo $this->getPagerHtml(); ?></div> -->
+        <div class="ict-shopbybrand-makers-list-container ">
+            <?php foreach ($_makers as $_maker) : ?>
+                <?php /** @var Ict\Shopbybrand\Model\Maker $_maker */ ?>
+                <div class="ict-shopbybrand-maker-list-item <?php echo substr($_maker->getName(), 0, 1) ?> active">
+                <div class="ict-shopbybrand-inner">
+                    <a href="<?php echo $_maker->getMakerUrl();?>">
+                    <img src="<?php echo $this->getBaseUrl().$_maker->getAvatar();  ?>">
+                    <span> <?php echo $_maker->getName();?> </span>
+                    </a>
+                    </div>
+                </div>
+            <?php endforeach;?>
+        </div>
+        <!-- <div class="ict-shopbybrand-makers-toolbar toolbar bottom"><?php //echo $this->getPagerHtml(); ?></div> -->
+    <?php else : ?>
+        <?php echo __('There are no shopbybrand at this moment');?>
+    <?php endif;?>
+</div>
+
+<script type="text/javascript">
+    jQuery(".makers ul li").click(function(){
+        var id = jQuery(this).attr("class"); 
+        var ids = jQuery(this).attr("id"); 
+        if(ids != "disable"){
+            if(id == "All"){
+                jQuery(".makers ul li").each(function(){
+                    jQuery(this).removeClass("active");
+                });
+                jQuery(this).addClass("active");
+                jQuery(".ict-shopbybrand-makers-list-container div").each(function(){
+                    jQuery(this).addClass("active");
+                });
+            } else {
+                jQuery(".makers ul li").each(function(){
+                    jQuery(this).removeClass("active");
+                });
+                jQuery(this).addClass("active");
+                jQuery(".ict-shopbybrand-makers-list-container div").each(function(){
+                    jQuery(this).removeClass("active");
+                });
+                jQuery(".ict-shopbybrand-makers-list-container div."+id+"").each(function(){
+                    jQuery(this).addClass("active");
+                });
+            }
+        }
+    });
+</script>

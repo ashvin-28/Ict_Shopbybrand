@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Magento/Core/etc/config.xsd">
+    <default>
+        <ict_shopbybrand>
+            <maker>
+                <enabled>1</enabled>
+                <breadcrumbs>1</breadcrumbs>
+                <list_url>makers.html</list_url>
+                <url_prefix>maker</url_prefix>
+                <url_suffix>html</url_suffix>
+            </maker>
+        </ict_shopbybrand>
+    </default>
+</config>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Ict Team
+ * @copyright Copyright (c) 2017 Ict (http://icreativetechnologies.com/)
+ * @package Ict_Shopbybrand
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Ict\Shopbybrand\Block\Catalog\Category\ListMaker" ifconfig="ict_shopbybrand/maker/enabled" name="catalog.category.list.ict.shopbybrand.maker" template="Ict_Shopbybrand::catalog/category/maker.phtml" after="-" />
+        </referenceContainer>
+    </body>
+</page>

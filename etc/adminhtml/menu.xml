@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Ict_Shopbybrand::shopbybrand"  title="Shopbybrand" module="Ict_Shopbybrand" sortOrder="25" resource="Ict_Shopbybrand::shopbybrand"/>
+        <add id="Ict_Shopbybrand::maker" title="Shopbybrand" module="Ict_Shopbybrand" sortOrder="10" action="ict_shopbybrand/maker" resource="Ict_Shopbybrand::maker" parent="Ict_Shopbybrand::shopbybrand" />
+        <add id="Ict_Shopbybrand::makers" title="Import Shopbybrand" module="Ict_Shopbybrand" sortOrder="12" action="ict_shopbybrand/import" resource="Ict_Shopbybrand::makers" parent="Ict_Shopbybrand::shopbybrand" />
+        <add id="Ict_Shopbybrand::SystemConfg" title="Configuration" module="Magento_Config" sortOrder="15" parent="Ict_Shopbybrand::shopbybrand" action="adminhtml/system_config/edit/section/ict_shopbybrand" resource="Magento_Config::config"/>
+    </menu>
+</config>
