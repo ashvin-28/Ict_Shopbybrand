@@ -33,7 +33,7 @@ $character = array("All","A","B","C","D","E","F","G","H","I","J","K","L","M","N"
     if($enables){
      ?>
         <?php foreach ($_makers as $maker) {
-            array_push($char, substr($maker->getName(), 0, 1));
+            array_push($char, strtoupper(substr($maker->getName(), 0, 1)));
         }
         array_unique($char); ?>
         <ul>
@@ -55,7 +55,7 @@ $character = array("All","A","B","C","D","E","F","G","H","I","J","K","L","M","N"
         <div class="ict-shopbybrand-makers-list-container ">
             <?php foreach ($_makers as $_maker) : ?>
                 <?php /** @var Ict\Shopbybrand\Model\Maker $_maker */ ?>
-                <div class="ict-shopbybrand-maker-list-item <?php echo substr($_maker->getName(), 0, 1) ?> active">
+                <div class="ict-shopbybrand-maker-list-item <?php echo strtoupper(substr($_maker->getName(), 0, 1)) ?> active">
                 <div class="ict-shopbybrand-inner">
                     <a href="<?php echo $_maker->getMakerUrl();?>">
                     <img src="<?php echo $this->getBaseUrl().$_maker->getAvatar();  ?>">
