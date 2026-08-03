@@ -1,116 +1,118 @@
-<?php /** @var Ict\Shopbybrand\Block\Maker\ListMaker $this */ ?>
 <?php
 /**
  * @author Ict Team
  * @copyright Copyright (c) 2017 Ict (http://icreativetechnologies.com/)
  * @package Ict_Shopbybrand
  */
-?>
-<?php $_makers = $this->getMakers(); ?>
-<?php $char = array();
 
-$character = array("All","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"); ?>
+/** @var \Ict\Shopbybrand\Block\Maker\ListMaker $this */
+
+$_makers = $block->getMakers();
+$char = [];
+$character = [
+    "All", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+    "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+];
+?>
 <div class="makers">
-    <?php 
-    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-    $scopeConfig = $objectManager->create('Magento\Framework\App\Config\ScopeConfigInterface');
-    $enable = $scopeConfig->getValue('ict_shopbybrand/maker/searchshopbybrand');
-    if($enable){
-    ?>
-    <div class="search-makers">
-    <form class="maker-form" method="post" id="maker-form" action="">
-        <div class="search-input">
-            <input type="text" name="maker-search" placeholder="Search brand here..." id="maker-search" value="<?php echo $this->getRequest()->getPost("maker-search"); ?>" />
+    <?php if ($block->isSearchEnabled()): ?>
+        <div class="search-makers">
+            <form class="maker-form" method="post" id="maker-form" action="">
+                <div class="search-input">
+                    <input
+                        type="text"
+                        name="maker-search"
+                        placeholder="<?= __('Search brand here...'); ?>"
+                        id="maker-search"
+                        value="<?= $block->getRequest()->getPost("maker-search"); ?>"
+                    />
+                </div>
+                <div class="search-input active">
+                    <input type="submit" name="maker-button" value="<?= __('Search'); ?>" />
+                </div>
+            </form>
         </div>
-        <div class="search-input active">
-            <input type="submit" name="maker-button" value="Search" />
-        </div>
-    </form>
-    </div>
-    <?php } ?>
-    <?php
-    $enables = $scopeConfig->getValue('ict_shopbybrand/maker/charshopbybrand');
-    if($enables){
-     ?>
-        <?php foreach ($_makers as $maker) {
+    <?php endif; ?>
+
+    <?php if ($block->isAlphabetEnabled()): ?>
+        <?php
+        foreach ($_makers as $maker) {
             array_push($char, strtoupper(substr($maker->getName(), 0, 1)));
         }
-        array_unique($char); ?>
+        array_unique($char);
+        ?>
         <ul>
-        <?php foreach ($character as $key) { 
-            if(in_array($key,$char)){  ?>
-                <li class="<?php echo $key; ?>" id="enable"><a href="javascript:void(0)"><?php echo $key; ?></a></li>
-            <?php } else { ?>
-                <?php if($key == "All"){ ?>
-                    <li class="<?php echo $key; ?> active" id="active"><a href="javascript:void(0)"><?php echo $key; ?></a></li>
-                <?php } else { ?>
-                    <li class="<?php echo $key; ?>" id="disable"><a href="javascript:void(0)"><?php echo $key; ?></a></li>
-                <?php } ?>
-            <?php } ?>
-        <?php } ?>
+            <?php foreach ($character as $key): ?>
+                <?php if (in_array($key, $char)): ?>
+                    <li class="<?= $key; ?>" id="enable"><a href="javascript:void(0)"><?= $key; ?></a></li>
+                <?php elseif ($key === "All"): ?>
+                    <li class="<?= $key; ?> active" id="active"><a href="javascript:void(0)"><?= $key; ?></a></li>
+                <?php else: ?>
+                    <li class="<?= $key; ?>" id="disable"><a href="javascript:void(0)"><?= $key; ?></a></li>
+                <?php endif; ?>
+            <?php endforeach; ?>
         </ul>
-    <?php } ?>
-    <?php if ($_makers->getSize() > 0) :?>
-        <!-- <div class="ict-shopbybrand-makers-toolbar toolbar top"><?php //echo $this->getPagerHtml(); ?></div> -->
-        <div class="ict-shopbybrand-makers-list-container ">
-            <?php foreach ($_makers as $_maker) : ?>
-                <?php /** @var Ict\Shopbybrand\Model\Maker $_maker */ ?>
-                <div class="ict-shopbybrand-maker-list-item <?php echo strtoupper(substr($_maker->getName(), 0, 1)) ?> active">
-                <div class="ict-shopbybrand-inner">
-                    <a href="<?php echo $_maker->getMakerUrl();?>">
-                    <img src="<?php echo $this->getBaseUrl().$_maker->getAvatar();  ?>">
-                    <span> <?php echo $_maker->getName();?> </span>
-                    </a>
+    <?php endif; ?>
+
+    <?php if ($_makers->getSize() > 0): ?>
+        <div class="ict-shopbybrand-makers-list-container">
+            <?php foreach ($_makers as $_maker): ?>
+                <?php /** @var \Ict\Shopbybrand\Model\Maker $_maker */ ?>
+                <div class="ict-shopbybrand-maker-list-item <?= strtoupper(substr($_maker->getName(), 0, 1)) ?> active">
+                    <div class="ict-shopbybrand-inner">
+                        <a href="<?= $_maker->getMakerUrl(); ?>">
+                            <img src="<?= $block->getBaseUrl() . $_maker->getAvatar(); ?>">
+                            <span><?= $_maker->getName(); ?></span>
+                        </a>
                     </div>
                 </div>
-            <?php endforeach;?>
+            <?php endforeach; ?>
         </div>
-        <!-- <div class="ict-shopbybrand-makers-toolbar toolbar bottom"><?php //echo $this->getPagerHtml(); ?></div> -->
-    <?php else : ?>
-        <?php echo __('There are no shopbybrand at this moment');?>
-    <?php endif;?>
+    <?php else: ?>
+        <?= __('There are no shopbybrand at this moment'); ?>
+    <?php endif; ?>
 </div>
 
-<script type="text/javascript">
-    jQuery(".makers ul li").click(function(){
-        var id = jQuery(this).attr("class"); 
-        var ids = jQuery(this).attr("id"); 
-        if(ids != "disable"){
-            if(id == "All"){
-                jQuery(".makers ul li").each(function(){
+<!-- <script type="text/javascript">
+    jQuery(".makers ul li").click(function () {
+        var id = jQuery(this).attr("class");
+        var ids = jQuery(this).attr("id");
+        if (ids !== "disable") {
+            if (id === "All") {
+                jQuery(".makers ul li").each(function () {
                     jQuery(this).removeClass("active");
                 });
                 jQuery(this).addClass("active");
-                jQuery(".ict-shopbybrand-makers-list-container div").each(function(){
+                jQuery(".ict-shopbybrand-makers-list-container div").each(function () {
                     jQuery(this).addClass("active");
                 });
             } else {
-                jQuery(".makers ul li").each(function(){
+                jQuery(".makers ul li").each(function () {
                     jQuery(this).removeClass("active");
                 });
                 jQuery(this).addClass("active");
-                jQuery(".ict-shopbybrand-makers-list-container div").each(function(){
+                jQuery(".ict-shopbybrand-makers-list-container div").each(function () {
                     jQuery(this).removeClass("active");
                 });
-                jQuery(".ict-shopbybrand-makers-list-container div."+id+"").each(function(){
+                jQuery(".ict-shopbybrand-makers-list-container div." + id + "").each(function () {
                     jQuery(this).addClass("active");
                 });
             }
         }
     });
 
-    jQuery("#maker-form").on("submit", function(e){
+    jQuery("#maker-form").on("submit", function (e) {
         e.preventDefault();
         var searchVal = jQuery("#maker-search").val().toLowerCase().trim();
         jQuery(".makers ul li").removeClass("active");
-        if(searchVal == ""){
+        if (searchVal === "") {
             jQuery(".makers ul li.All").addClass("active");
             jQuery(".ict-shopbybrand-maker-list-item").addClass("active");
         } else {
             jQuery(".makers ul li.All").addClass("active");
-            jQuery(".ict-shopbybrand-maker-list-item").each(function(){
+            jQuery(".ict-shopbybrand-maker-list-item").each(function () {
                 var name = jQuery(this).find("span").text().toLowerCase();
-                if(name.indexOf(searchVal) !== -1){
+                if (name.indexOf(searchVal) !== -1) {
                     jQuery(this).addClass("active");
                 } else {
                     jQuery(this).removeClass("active");
@@ -120,8 +122,63 @@ $character = array("All","A","B","C","D","E","F","G","H","I","J","K","L","M","N"
     });
 
     // Real click lands on the wrapper div, not the submit input directly
-    jQuery(".search-input.active").on("click", function(e){
+    jQuery(".search-input.active").on("click", function (e) {
         e.preventDefault();
         jQuery("#maker-form").trigger("submit");
     });
+</script> -->
+<script type="text/javascript">
+require(['jquery'], function ($) {
+    $(".makers ul li").click(function(){
+        var id = $(this).attr("class"); 
+        var ids = $(this).attr("id"); 
+        if(ids != "disable"){
+            if(id == "All"){
+                $(".makers ul li").each(function(){
+                    $(this).removeClass("active");
+                });
+                $(this).addClass("active");
+                $(".ict-shopbybrand-makers-list-container div").each(function(){
+                    $(this).addClass("active");
+                });
+            } else {
+                $(".makers ul li").each(function(){
+                    $(this).removeClass("active");
+                });
+                $(this).addClass("active");
+                $(".ict-shopbybrand-makers-list-container div").each(function(){
+                    $(this).removeClass("active");
+                });
+                $(".ict-shopbybrand-makers-list-container div."+id+"").each(function(){
+                    $(this).addClass("active");
+                });
+            }
+        }
+    });
+
+    $("#maker-form").on("submit", function(e){
+        e.preventDefault();
+        var searchVal = $("#maker-search").val().toLowerCase().trim();
+        $(".makers ul li").removeClass("active");
+        if(searchVal == ""){
+            $(".makers ul li.All").addClass("active");
+            $(".ict-shopbybrand-maker-list-item").addClass("active");
+        } else {
+            $(".makers ul li.All").addClass("active");
+            $(".ict-shopbybrand-maker-list-item").each(function(){
+                var name = $(this).find("span").text().toLowerCase();
+                if(name.indexOf(searchVal) !== -1){
+                    $(this).addClass("active");
+                } else {
+                    $(this).removeClass("active");
+                }
+            });
+        }
+    });
+
+    $(".search-input.active").on("click", function(e){
+        e.preventDefault();
+        $("#maker-form").trigger("submit");
+    });
+});
 </script>

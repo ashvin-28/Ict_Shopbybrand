@@ -11,6 +11,7 @@ use Magento\Framework\View\Element\Template;
 use Ict\Shopbybrand\Model\Maker\Category as CategoryModel;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Element\Template\Context;
+use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
 class ListMaker extends Template
@@ -106,5 +107,18 @@ class ListMaker extends Template
         return $this->storeManager->getStore()->getBaseUrl(
             \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
         ) . 'ict/shopbybrand/maker/image';
+    }
+
+    /**
+     * Whether the category-page brand slider is enabled via configuration.
+     *
+     * @return bool
+     */
+    public function isCategorySliderEnabled()
+    {
+        return (bool)$this->_scopeConfig->getValue(
+            'ict_shopbybrand/maker/cateshopbybrand',
+            ScopeInterface::SCOPE_STORE
+        );
     }
 }

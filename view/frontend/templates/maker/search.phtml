@@ -1,28 +1,26 @@
-<?php /** @var Ict\Shopbybrand\Block\Maker\ListMaker $this */ ?>
 <?php
 /**
  * @author Ict Team
  * @copyright Copyright (c) 2017 Ict (http://icreativetechnologies.com/)
  * @package Ict_Shopbybrand
  */
+
+/** @var \Ict\Shopbybrand\Block\Maker\ListMaker $this */
 ?>
-<?php 
-    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-    $scopeConfig = $objectManager->create('Magento\Framework\App\Config\ScopeConfigInterface');
-    $enable = $scopeConfig->getValue('ict_shopbybrand/maker/layershopbybrand');
-if($enable){
-?>
-<?php $_makers = $this->getMakers();?>
-<div class="shopbybrand-left">
-    <strong class="block-subtitle filter-subtitle"><?php echo __("Shopbybrand") ?></strong>
-    <?php if ($_makers->getSize() > 0) :?>
-    <ul>
-        <?php  foreach ($_makers as $_maker) { ?>
-            <li class="brand-filter"><a href="<?php echo $_maker->getMakerUrl();?>"><?php echo $_maker->getName(); ?></a></li>
-        <?php } ?>
-    </ul>
-    <?php else : ?>
-        <?php echo __('There are no shopbybrand at this moment');?>
-    <?php endif;?>
-</div>
-<?php } ?>
+<?php if ($block->isLayeredNavEnabled()): ?>
+    <?php $_makers = $block->getMakers(); ?>
+    <div class="shopbybrand-left">
+        <strong class="block-subtitle filter-subtitle"><?= __("Shopbybrand") ?></strong>
+        <?php if ($_makers->getSize() > 0): ?>
+            <ul>
+                <?php foreach ($_makers as $_maker): ?>
+                    <li class="brand-filter">
+                        <a href="<?= $_maker->getMakerUrl(); ?>"><?= $_maker->getName(); ?></a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php else: ?>
+            <?= __('There are no shopbybrand at this moment'); ?>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>

@@ -20,6 +20,19 @@ use Magento\Store\Model\StoreManagerInterface;
 class Collection extends MakerCollection implements SearchResultInterface
 {
     /**
+     * Skip store join from parent to avoid duplicate rows in grid
+     */
+    protected function _afterLoad()
+    {
+        return \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection::_afterLoad();
+    }
+
+    protected function _renderFiltersBefore()
+    {
+        return \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection::_renderFiltersBefore();
+    }
+
+    /**
      * @var \Magento\Framework\Search\AggregationInterface
      */
     private $aggregations;

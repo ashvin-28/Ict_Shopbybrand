@@ -7,20 +7,20 @@
  */
 ?>
 <?php /** @var \Ict\Shopbybrand\Model\Maker $_maker */?>
-<?php $_maker = $this->getCurrentMaker();?>
-<?php 
+<?php $_maker = $block->getCurrentMaker();?>
+<?php
     $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
     $scopeConfig = $objectManager->create('Magento\Framework\App\Config\ScopeConfigInterface');
     $enable = $scopeConfig->getValue('ict_shopbybrand/maker/banners');
     
-    ?>
-<?php if($enable){ ?>
+?>
+<?php if ($enable) { ?>
 <div class="maker-view">
     <div class="banner">
-        <img src="<?php echo $this->getBaseUrl().$_maker->getLogobanner();  ?>">
+        <img src="<?= $block->getBaseUrl().$_maker->getLogobanner();  ?>">
     </div>
     <div class="banner-text">
-        <p class="texts"><?php echo __($_maker->getBannerText()); ?></p>
+        <p class="texts"><?= __($_maker->getBannerText()); ?></p>
     </div>
 </div>
 <?php } ?>

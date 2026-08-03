@@ -90,4 +90,43 @@ class ListMaker extends Template
             \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
         ).'ict/shopbybrand/maker/image' ;
     }
+
+    /**
+     * Whether the brand search box is enabled via configuration.
+     *
+     * @return bool
+     */
+    public function isSearchEnabled()
+    {
+        return (bool)$this->_scopeConfig->getValue(
+            'ict_shopbybrand/maker/searchshopbybrand',
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
+     * Whether the alphabetical (A-Z) filter is enabled via configuration.
+     *
+     * @return bool
+     */
+    public function isAlphabetEnabled()
+    {
+        return (bool)$this->_scopeConfig->getValue(
+            'ict_shopbybrand/maker/charshopbybrand',
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
+     * Whether the layered-navigation brand block (sidebar) is enabled via configuration.
+     *
+     * @return bool
+     */
+    public function isLayeredNavEnabled()
+    {
+        return (bool)$this->_scopeConfig->getValue(
+            'ict_shopbybrand/maker/layershopbybrand',
+            ScopeInterface::SCOPE_STORE
+        );
+    }
 }

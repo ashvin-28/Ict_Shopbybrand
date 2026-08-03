@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * @author Ict Team
  * @copyright Copyright (c) 2017 Ict (http://icreativetechnologies.com/)
@@ -7,16 +7,16 @@
 ?>
 <?php /** @var \Ict\Shopbybrand\Block\Adminhtml\Catalog\Category\Tab\Maker $this */?>
 
-<?php echo $this->getChildHtml() ?>
+<?= $block->getChildHtml() ?>
 <div class="no-display">
     <input type="hidden" name="category_ict_shopbybrand_makers" id="in_category_ict_shopbybrand_makers" value=""/>
 </div>
-<?php if(($block = $this->getLayout()->getBlock('category.ict_shopbybrand.maker.grid')) && ($_gridJsObject = $block->getJsObjectName())): ?>
+<?php if (($block = $block->getLayout()->getBlock('category.ict_shopbybrand.maker.grid')) && ($_gridJsObject = $block->getJsObjectName())): ?>
     <script type="text/javascript">
         require([
             "mage/adminhtml/grid"
         ], function(){
-            var categoryIctShopbybrandMakers = $H(<?php echo json_encode($block->getSelectedMakers()) ?>);
+            var categoryIctShopbybrandMakers = $H(<?= json_encode($block->getSelectedMakers()) ?>);
             $('in_category_ict_shopbybrand_makers').value = Object.toJSON(categoryIctShopbybrandMakers);
 
             function registerCategoryIctShopbybrandMaker(grid, element, checked){
@@ -43,7 +43,7 @@
                     var checkbox = Element.getElementsBySelector(trElement, 'input');
                     if(checkbox[0]){
                         var checked = isInput ? checkbox[0].checked : !checkbox[0].checked;
-                        <?php echo $_gridJsObject ?>.setCheckboxChecked(checkbox[0], checked);
+                        <?= $_gridJsObject ?>.setCheckboxChecked(checkbox[0], checked);
                     }
                 }
             }
@@ -69,11 +69,11 @@
             }
 
 
-            <?php echo $_gridJsObject ?>.rowClickCallback = categoryIctShopbybrandMakerRowClick;
-            <?php echo $_gridJsObject ?>.initRowCallback = categoryIctShopbybrandMakerRowInit;
-            <?php echo $_gridJsObject ?>.checkboxCheckCallback = registerCategoryIctShopbybrandMaker;
-            <?php echo $_gridJsObject ?>.rows.each(function(row){
-                categoryIctShopbybrandMakerRowInit(<?php echo $_gridJsObject ?>, row)
+            <?= $_gridJsObject ?>.rowClickCallback = categoryIctShopbybrandMakerRowClick;
+            <?= $_gridJsObject ?>.initRowCallback = categoryIctShopbybrandMakerRowInit;
+            <?= $_gridJsObject ?>.checkboxCheckCallback = registerCategoryIctShopbybrandMaker;
+            <?= $_gridJsObject ?>.rows.each(function(row){
+                categoryIctShopbybrandMakerRowInit(<?= $_gridJsObject ?>, row)
             });
         });
 

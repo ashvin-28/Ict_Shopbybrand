@@ -8,9 +8,9 @@
 -->
 <page layout="3columns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
 	<head>
-		<link src="jquery/jquery.min.js"/>
-		<link src="Ict_Shopbybrand/js/owl.carousel.js"/>
-        <css src="Ict_Shopbybrand/css/owl.carousel.css"/>
+		<css src="Ict_Shopbybrand/css/owl.carousel.css"/>
+        <css src="Ict_Shopbybrand/css/owl.theme.css"/>
+        <css src="Ict_Shopbybrand/css/shopbybrand.css"/>
 	</head>
     <body>
         <referenceContainer name="content">
