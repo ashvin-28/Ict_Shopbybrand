@@ -55,13 +55,9 @@ class Category extends GenericForm implements TabInterface
             [
                 'name' => 'categories_ids',
                 'label' => __('Categories'),
-                // 'after_element_html' => '<a id="category_link" href="javascript:void(0)" '
-                //     . 'onclick="toggleMainCategories()"><img src="'
-                //     . $this->getBaseUrl()
-                //     . 'pub/static/adminhtml/Magento/backend/en_US/images/rule_chooser_trigger.gif" '
-                //     . 'alt="" class="v-middle rule-chooser-trigger" title="Select Categories"></a>
-                // <div id="main_categories_select" style="display:none"></div>
-                'after_element_html' => '<a id="category_link" href="javascript:void(0)" onclick="toggleMainCategories()" class="action-default" style="margin-left:8px;">' . __('Select Categories') . '</a>
+                'after_element_html' => '<a id="category_link" href="javascript:void(0)" '
+                    . 'onclick="toggleMainCategories()" class="action-default" '
+                    . 'style="margin-left:8px;">' . __('Select Categories') . '</a>
 <div id="main_categories_select" style="display:none"></div>
                     <script type="text/javascript">
                     function toggleMainCategories(check){

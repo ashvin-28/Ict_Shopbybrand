@@ -22,13 +22,13 @@ $character = [
                     <input
                         type="text"
                         name="maker-search"
-                        placeholder="<?= __('Search brand here...'); ?>"
+                        placeholder="<?= $escaper->escapeHtmlAttr(__('Search brand here...')) ?>"
                         id="maker-search"
-                        value="<?= $block->getRequest()->getPost("maker-search"); ?>"
+                        value="<?= $escaper->escapeHtmlAttr($block->getRequest()->getPost("maker-search")) ?>"
                     />
                 </div>
                 <div class="search-input active">
-                    <input type="submit" name="maker-button" value="<?= __('Search'); ?>" />
+                    <input type="submit" name="maker-button" value="<?= $escaper->escapeHtmlAttr(__('Search')) ?>" />
                 </div>
             </form>
         </div>
@@ -44,11 +44,17 @@ $character = [
         <ul>
             <?php foreach ($character as $key): ?>
                 <?php if (in_array($key, $char)): ?>
-                    <li class="<?= $key; ?>" id="enable"><a href="javascript:void(0)"><?= $key; ?></a></li>
+                    <li class="<?= $escaper->escapeHtmlAttr($key) ?>" id="enable">
+                        <a href="javascript:void(0)"><?= $escaper->escapeHtml($key) ?></a>
+                    </li>
                 <?php elseif ($key === "All"): ?>
-                    <li class="<?= $key; ?> active" id="active"><a href="javascript:void(0)"><?= $key; ?></a></li>
+                    <li class="<?= $escaper->escapeHtmlAttr($key) ?> active" id="active">
+                        <a href="javascript:void(0)"><?= $escaper->escapeHtml($key) ?></a>
+                    </li>
                 <?php else: ?>
-                    <li class="<?= $key; ?>" id="disable"><a href="javascript:void(0)"><?= $key; ?></a></li>
+                    <li class="<?= $escaper->escapeHtmlAttr($key) ?>" id="disable">
+                        <a href="javascript:void(0)"><?= $escaper->escapeHtml($key) ?></a>
+                    </li>
                 <?php endif; ?>
             <?php endforeach; ?>
         </ul>
@@ -58,76 +64,23 @@ $character = [
         <div class="ict-shopbybrand-makers-list-container">
             <?php foreach ($_makers as $_maker): ?>
                 <?php /** @var \Ict\Shopbybrand\Model\Maker $_maker */ ?>
-                <div class="ict-shopbybrand-maker-list-item <?= strtoupper(substr($_maker->getName(), 0, 1)) ?> active">
+                <?php $firstLetter = strtoupper(substr($_maker->getName(), 0, 1)); ?>
+                <div class="ict-shopbybrand-maker-list-item <?= $escaper->escapeHtmlAttr($firstLetter) ?> active">
                     <div class="ict-shopbybrand-inner">
-                        <a href="<?= $_maker->getMakerUrl(); ?>">
-                            <img src="<?= $block->getBaseUrl() . $_maker->getAvatar(); ?>">
-                            <span><?= $_maker->getName(); ?></span>
+                        <a href="<?= $escaper->escapeUrl($_maker->getMakerUrl()) ?>">
+                            <img src="<?= $escaper->escapeUrl($block->getBaseUrl() . $_maker->getAvatar()) ?>">
+                            <span><?= $escaper->escapeHtml($_maker->getName()) ?></span>
                         </a>
                     </div>
                 </div>
             <?php endforeach; ?>
         </div>
     <?php else: ?>
-        <?= __('There are no shopbybrand at this moment'); ?>
+        <?= $escaper->escapeHtml(__('There are no shopbybrand at this moment')) ?>
     <?php endif; ?>
 </div>
 
-<!-- <script type="text/javascript">
-    jQuery(".makers ul li").click(function () {
-        var id = jQuery(this).attr("class");
-        var ids = jQuery(this).attr("id");
-        if (ids !== "disable") {
-            if (id === "All") {
-                jQuery(".makers ul li").each(function () {
-                    jQuery(this).removeClass("active");
-                });
-                jQuery(this).addClass("active");
-                jQuery(".ict-shopbybrand-makers-list-container div").each(function () {
-                    jQuery(this).addClass("active");
-                });
-            } else {
-                jQuery(".makers ul li").each(function () {
-                    jQuery(this).removeClass("active");
-                });
-                jQuery(this).addClass("active");
-                jQuery(".ict-shopbybrand-makers-list-container div").each(function () {
-                    jQuery(this).removeClass("active");
-                });
-                jQuery(".ict-shopbybrand-makers-list-container div." + id + "").each(function () {
-                    jQuery(this).addClass("active");
-                });
-            }
-        }
-    });
-
-    jQuery("#maker-form").on("submit", function (e) {
-        e.preventDefault();
-        var searchVal = jQuery("#maker-search").val().toLowerCase().trim();
-        jQuery(".makers ul li").removeClass("active");
-        if (searchVal === "") {
-            jQuery(".makers ul li.All").addClass("active");
-            jQuery(".ict-shopbybrand-maker-list-item").addClass("active");
-        } else {
-            jQuery(".makers ul li.All").addClass("active");
-            jQuery(".ict-shopbybrand-maker-list-item").each(function () {
-                var name = jQuery(this).find("span").text().toLowerCase();
-                if (name.indexOf(searchVal) !== -1) {
-                    jQuery(this).addClass("active");
-                } else {
-                    jQuery(this).removeClass("active");
-                }
-            });
-        }
-    });
-
-    // Real click lands on the wrapper div, not the submit input directly
-    jQuery(".search-input.active").on("click", function (e) {
-        e.preventDefault();
-        jQuery("#maker-form").trigger("submit");
-    });
-</script> -->
-<script type="text/javascript">
+<script>
 require(['jquery'], function ($) {
     $(".makers ul li").click(function(){
         var id = $(this).attr("class"); 

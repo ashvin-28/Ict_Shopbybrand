@@ -392,7 +392,7 @@ if (typeof Object.create !== "function") {
         buildControls : function () {
             var base = this;
             if (base.options.navigation === true || base.options.pagination === true) {
-                base.owlControls = $("<div class=\"owl-controls\"/>").toggleClass("clickable", !base.browser.isTouch).appendTo(base.$elem);
+                base.owlControls = $("<div class=\"owl-controls\"></div>").toggleClass("clickable", !base.browser.isTouch).appendTo(base.$elem);
             }
             if (base.options.pagination === true) {
                 base.buildPagination();
@@ -404,15 +404,15 @@ if (typeof Object.create !== "function") {
 
         buildButtons : function () {
             var base = this,
-                buttonsWrapper = $("<div class=\"owl-buttons\"/>");
+                buttonsWrapper = $("<div class=\"owl-buttons\"></div>");
             base.owlControls.append(buttonsWrapper);
 
-            base.buttonPrev = $("<div/>", {
+            base.buttonPrev = $("<div></div>", {
                 "class" : "owl-prev",
                 "html" : base.options.navigationText[0] || ""
             });
 
-            base.buttonNext = $("<div/>", {
+            base.buttonNext = $("<div></div>", {
                 "class" : "owl-next",
                 "html" : base.options.navigationText[1] || ""
             });
@@ -438,7 +438,7 @@ if (typeof Object.create !== "function") {
         buildPagination : function () {
             var base = this;
 
-            base.paginationWrapper = $("<div class=\"owl-pagination\"/>");
+            base.paginationWrapper = $("<div class=\"owl-pagination\"></div>");
             base.owlControls.append(base.paginationWrapper);
 
             base.paginationWrapper.on("touchend.owlControls mouseup.owlControls", ".owl-page", function (event) {
@@ -473,7 +473,7 @@ if (typeof Object.create !== "function") {
                     if (lastPage === i) {
                         lastItem = base.itemsAmount - base.options.items;
                     }
-                    paginationButton = $("<div/>", {
+                    paginationButton = $("<div></div>", {
                         "class" : "owl-page"
                     });
                     paginationButtonInner = $("<span></span>", {

@@ -15,7 +15,7 @@
     <body>
         <referenceContainer name="content">
             <block class="Magento\Framework\View\Element\FormKey" name="formkey"/>
-            <block class="Ict\Shopbybrand\Block\Maker\Homebrand" after="-" name="brandcollection" as="brandcollection" ifconfig="ict_shopbybrand/maker/enabled" template="Ict_Shopbybrand::maker/homebrand.phtml"/>
+            <block class="Ict\Shopbybrand\Block\Maker\Homebrand" before="-" name="brandcollection" as="brandcollection" ifconfig="ict_shopbybrand/maker/enabled" template="Ict_Shopbybrand::maker/homebrand.phtml"/>
         </referenceContainer>
 
     </body>

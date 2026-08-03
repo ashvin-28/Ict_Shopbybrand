@@ -10,17 +10,19 @@
 <?php if ($block->isLayeredNavEnabled()): ?>
     <?php $_makers = $block->getMakers(); ?>
     <div class="shopbybrand-left">
-        <strong class="block-subtitle filter-subtitle"><?= __("Shopbybrand") ?></strong>
+        <strong class="block-subtitle filter-subtitle"><?= $escaper->escapeHtml(__("Shopbybrand")) ?></strong>
         <?php if ($_makers->getSize() > 0): ?>
             <ul>
                 <?php foreach ($_makers as $_maker): ?>
                     <li class="brand-filter">
-                        <a href="<?= $_maker->getMakerUrl(); ?>"><?= $_maker->getName(); ?></a>
+                        <a href="<?= $escaper->escapeUrl($_maker->getMakerUrl()) ?>">
+                            <?= $escaper->escapeHtml($_maker->getName()) ?>
+                        </a>
                     </li>
                 <?php endforeach; ?>
             </ul>
         <?php else: ?>
-            <?= __('There are no shopbybrand at this moment'); ?>
+            <?= $escaper->escapeHtml(__('There are no shopbybrand at this moment')) ?>
         <?php endif; ?>
     </div>
 <?php endif; ?>

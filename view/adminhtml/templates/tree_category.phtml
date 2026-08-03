@@ -1,41 +1,60 @@
-<?php
-global $postData;
+<?php // phpcs:ignore PSR1.Files.SideEffects.FoundWithSymbols
+/**
+ * @author Ict Team
+ * @copyright Copyright (c) 2017 Ict (http://icreativetechnologies.com/)
+ * @package Ict_Shopbybrand
+ */
 
 $postData = $block->getCategoryIds();
 
-function categoryLoop($id)
+/**
+ * Recursively render the category checkbox tree.
+ *
+ * @param int $id
+ * @param string $postData
+ * @return void
+ */
+// phpcs:ignore Squiz.Functions.GlobalFunction.Found
+function categoryLoop($id, $postData)
 {
-    
-    global $postData;
-
     $postCatArray = explode(',', $postData);
-    
+
+    // phpcs:ignore Magento2.Templates.ObjectManager.ObjectManagerUsageFound
     $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-    
-    $categories = $objectManager->create('Magento\Catalog\Model\Category')->load($id);
+
+    $categories = $objectManager->create(\Magento\Catalog\Model\Category::class)->load($id);
 
     if ($categories->hasChildren()) { ?>
         <ul>
         <?php
         $subcategories = explode(',', $categories->getChildren());
         foreach ($subcategories as $category) {
-            $subcategory = $objectManager->create('Magento\Catalog\Model\Category')->load($category); ?>
+            $subcategory = $objectManager->create(\Magento\Catalog\Model\Category::class)->load($category); ?>
             <li>
             <div class="category-item">
             <span class="checkbox-input">
-            <input type='checkbox' class='category-checkbox' value="<?= $category ?>" <?php if (in_array($category, $postCatArray)) { echo 'checked'; } ?> /></span>
-            
+            <input
+                type='checkbox'
+                class='category-checkbox'
+                value="<?= $escaper->escapeHtmlAttr($category) ?>"
+                <?php if (in_array($category, $postCatArray)) {
+                    echo 'checked';
+                } ?>
+            /></span>
+
             <span class="cat-name">
-            <?= $subcategory->getName(); ?>
+            <?= $escaper->escapeHtml($subcategory->getName()) ?>
             </span>
             </div>
             </li>
-            <?php if ($subcategory->hasChildren()) { echo "<li>";
-                categoryLoop($category);
-                echo "</li>"; }
-        }?>
+            <?php if ($subcategory->hasChildren()) {
+                echo "<li>";
+                categoryLoop($category, $postData);
+                echo "</li>";
+            }
+        } ?>
         </ul>
     <?php }
 }
 
-categoryLoop(2);
+categoryLoop(2, $postData);

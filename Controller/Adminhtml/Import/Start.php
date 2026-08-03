@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Ict Team
  * @copyright Copyright (c) 2017 Ict (http://icreativetechnologies.com/)
@@ -96,6 +97,7 @@ class Start extends ImportResultController
      *
      * @return \Magento\Framework\Controller\ResultInterface
      */
+    // phpcs:ignore Generic.Metrics.NestingLevel.TooHigh
     public function execute()
     {
         $data = $this->getRequest()->getPostValue();
@@ -106,17 +108,17 @@ class Start extends ImportResultController
             $resultBlock = $resultLayout->getLayout()->getBlock('import.frame.result');
 
             $resultBlock
-            ->addAction('show', 'import_validation_container')
-            ->addAction('innerHTML', 'import_validation_container_header', __('Status'))
-            ->addAction('hide', ['edit_form', 'upload_button', 'messages']);
+                ->addAction('show', 'import_validation_container')
+                ->addAction('innerHTML', 'import_validation_container_header', __('Status'))
+                ->addAction('hide', ['edit_form', 'upload_button', 'messages']);
 
             $csv_data = $this->_fileCsv->getData($data["uploaded_file"]);
             $tmp = array_shift($csv_data);
-            
+
             $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
             $mediaUrl = $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class)
-                        ->getStore()
-                        ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+                ->getStore()
+                ->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
 
             $fileSystem = $objectManager->create(\Magento\Framework\Filesystem::class);
             $mediaPath = $fileSystem->getDirectoryRead(
@@ -130,28 +132,28 @@ class Start extends ImportResultController
                 $this->error_cnt++;
             } else {
                 foreach ($csv_data as $key => $value) {
-                    $makers = $this->makerCollectionFactory->create()->addFieldToFilter("name", ["eq"=>$value[0]]);
-                    if (count($makers->getData())>0) {
+                    $makers = $this->makerCollectionFactory->create()->addFieldToFilter("name", ["eq" => $value[0]]);
+                    if (count($makers->getData()) > 0) {
                         foreach ($makers as $key) {
                             // phpcs:ignore Magento2.Functions.DiscouragedFunction.DiscouragedWithAlternative
-                            if (!is_dir($mediaUrl."ict/import")) {
+                            if (!is_dir($mediaUrl . "ict/import")) {
                                 // phpcs:ignore Magento2.Functions.DiscouragedFunction.DiscouragedWithAlternative
-                                mkdir($mediaUrl."ict/import", 0777);
+                                mkdir($mediaUrl . "ict/import", 0777);
                             }
                             // phpcs:ignore Magento2.Functions.DiscouragedFunction.DiscouragedWithAlternative
-                            if (!is_dir($mediaUrl."ict/shopbybrand/maker/image")) {
+                            if (!is_dir($mediaUrl . "ict/shopbybrand/maker/image")) {
                                 // phpcs:ignore Magento2.Functions.DiscouragedFunction.DiscouragedWithAlternative
-                                mkdir($mediaUrl."ict/shopbybrand/maker/image", 0777);
+                                mkdir($mediaUrl . "ict/shopbybrand/maker/image", 0777);
                             }
-                            $fb_image_url = $mediaUrl."ict/import".$value[3];
-                            $fb_image_urls = $mediaUrl."ict/import".$value[3];
+                            $fb_image_url = $mediaUrl . "ict/import" . $value[3];
+                            $fb_image_urls = $mediaUrl . "ict/import" . $value[3];
                             // phpcs:ignore Magento2.Functions.DiscouragedFunction.Discouraged
                             if (!file_exists($fb_image_url)) {
                                 // phpcs:ignore Magento2.Functions.DiscouragedFunction.Discouraged
                                 $result = file_get_contents($fb_image_url);
                                 $filename = $value[3];
                                 // phpcs:ignore Magento2.Functions.DiscouragedFunction.Discouraged
-                                file_put_contents($mediaPath.'ict/shopbybrand/maker/image'.$filename, $result);
+                                file_put_contents($mediaPath . 'ict/shopbybrand/maker/image' . $filename, $result);
                             }
                             // phpcs:ignore Magento2.Functions.DiscouragedFunction.Discouraged
                             if (!file_exists($fb_image_urls)) {
@@ -159,7 +161,7 @@ class Start extends ImportResultController
                                 $results = file_get_contents($fb_image_urls);
                                 $filenames = $value[4];
                                 // phpcs:ignore Magento2.Functions.DiscouragedFunction.Discouraged
-                                file_put_contents($mediaPath.'ict/shopbybrand/maker/image'.$filenames, $results);
+                                file_put_contents($mediaPath . 'ict/shopbybrand/maker/image' . $filenames, $results);
                             }
                             $makers = $objectManager->create(\Ict\Shopbybrand\Model\Maker::class)->load($key->getId());
                             $makers->setUrlKey($value[1]);
@@ -182,15 +184,15 @@ class Start extends ImportResultController
                             $updates++;
                         }
                     } else {
-                        $fb_image_url = $mediaUrl."ict/import".$value[3];
-                        $fb_image_urls = $mediaUrl."ict/import".$value[3];
+                        $fb_image_url = $mediaUrl . "ict/import" . $value[3];
+                        $fb_image_urls = $mediaUrl . "ict/import" . $value[3];
                         // phpcs:ignore Magento2.Functions.DiscouragedFunction.Discouraged
                         if (!file_exists($fb_image_url)) {
                             // phpcs:ignore Magento2.Functions.DiscouragedFunction.Discouraged
                             $result = file_get_contents($fb_image_url);
                             $filename = $value[3];
                             // phpcs:ignore Magento2.Functions.DiscouragedFunction.Discouraged
-                            file_put_contents($mediaPath.'ict/shopbybrand/maker/image'.$filename, $result);
+                            file_put_contents($mediaPath . 'ict/shopbybrand/maker/image' . $filename, $result);
                         }
                         // phpcs:ignore Magento2.Functions.DiscouragedFunction.Discouraged
                         if (!file_exists($fb_image_urls)) {
@@ -198,7 +200,7 @@ class Start extends ImportResultController
                             $results = file_get_contents($fb_image_urls);
                             $filenames = $value[4];
                             // phpcs:ignore Magento2.Functions.DiscouragedFunction.Discouraged
-                            file_put_contents($mediaPath.'ict/shopbybrand/maker/image'.$filenames, $results);
+                            file_put_contents($mediaPath . 'ict/shopbybrand/maker/image' . $filenames, $results);
                         }
                         $makers = $objectManager->create(\Ict\Shopbybrand\Model\Maker::class);
                         $makers->setName($value[0]);
@@ -224,16 +226,16 @@ class Start extends ImportResultController
                     $total++;
                 }
 
-                $response = ["total" => $total,"inserted" => $row, "updated" => $updates];
+                $response = ["total" => $total, "inserted" => $row, "updated" => $updates];
             }
 
             if (!empty($response)) {
-                
+
                 $write_msg = [];
                 $write_msg[] = __('Shopbybrand Import successfully done.');
-                $write_msg[] = __('Total : '.$response["total"].' Shopbybrand uploaded.');
-                $write_msg[] = __('Total : '.$response["inserted"].' Shopbybrand inserted.');
-                $write_msg[] = __('Total : '.$response["updated"].' Shopbybrand updated.');
+                $write_msg[] = __('Total : ' . $response["total"] . ' Shopbybrand uploaded.');
+                $write_msg[] = __('Total : ' . $response["inserted"] . ' Shopbybrand inserted.');
+                $write_msg[] = __('Total : ' . $response["updated"] . ' Shopbybrand updated.');
                 $resultBlock->addSuccess(implode("<br/>", $write_msg));
             }
 

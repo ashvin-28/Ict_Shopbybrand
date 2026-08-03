@@ -1,0 +1,48 @@
+{
+    "ict_shopbybrand_maker": {
+        "column": {
+            "maker_id": true,
+            "name": true,
+            "url_key": true,
+            "banner_text": true,
+            "avatar": true,
+            "logobanner": true,
+            "is_active": true,
+            "is_featured": true,
+            "categories_ids": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "ict_shopbybrand_maker_store": {
+        "column": {
+            "maker_id": true,
+            "store_id": true
+        },
+        "index": {
+            "ICT_SHOPBYBRAND_MAKER_STORE_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_3B66CE33E38EED04A9FEE2D54BA2B824": true,
+            "ICT_SHOPBYBRAND_MAKER_STORE_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "ict_shopbybrand_maker_product": {
+        "column": {
+            "maker_id": true,
+            "product_id": true,
+            "position": true
+        },
+        "index": {
+            "ICT_SHOPBYBRAND_MAKER_PRODUCT_PRODUCT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_3E39EF8C14BAC47ABE69E553B86D60F8": true,
+            "ICT_SHOPBYBRAND_MAKER_PRD_PRD_ID_CAT_PRD_ENTT_ENTT_ID": true,
+            "ICT_SHOPBYBRAND_MAKER_PRODUCT_MAKER_ID_PRODUCT_ID": true
+        }
+    }
+}

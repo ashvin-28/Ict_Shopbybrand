@@ -9,15 +9,15 @@
 <?php $_makers = $block->getMakerCollection();?>
 <?php if ($_makers && $_makers->count() > 0):?>
     <div class="block-content content product-shopbybrand">
-        <h2><?= __('Shopbybrand')?></h2>
+        <h2><?= $escaper->escapeHtml(__('Shopbybrand')) ?></h2>
         <?php /** @var \Ict\Shopbybrand\Model\Maker $_maker */?>
         <div><?= $block->getPagerHtml();?></div>
         <div style="clear:both"></div>
         <?php foreach ($_makers as $_maker): ?>
             <div class="item">
-                <a href="<?= $_maker->getMakerUrl();?>">
-                 <img src="<?= $block->getBaseUrl().$_maker->getAvatar();  ?>"></a>
-                 <?= $_maker->getName();?>
+                <a href="<?= $escaper->escapeUrl($_maker->getMakerUrl()) ?>">
+                 <img src="<?= $escaper->escapeUrl($block->getBaseUrl() . $_maker->getAvatar()) ?>"></a>
+                 <?= $escaper->escapeHtml($_maker->getName()) ?>
             </div>
         <?php endforeach; ?>
         <div><?= $block->getPagerHtml();?></div>

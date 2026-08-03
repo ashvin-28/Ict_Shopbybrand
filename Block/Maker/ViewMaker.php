@@ -60,4 +60,13 @@ class ViewMaker extends Template
             \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
         ) . 'ict/shopbybrand/maker/image';
     }
+    /**
+     * Whether the maker banner/description block is enabled via configuration.
+     *
+     * @return bool
+     */
+    public function isBannerEnabled()
+    {
+        return (bool)$this->_scopeConfig->getValue('ict_shopbybrand/maker/banners');
+    }
 }

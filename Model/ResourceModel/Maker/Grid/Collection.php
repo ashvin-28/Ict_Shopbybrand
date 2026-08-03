@@ -26,7 +26,9 @@ class Collection extends MakerCollection implements SearchResultInterface
     {
         return \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection::_afterLoad();
     }
-
+     /**
+      * Skip store filter rendering from parent to avoid duplicate rows in grid
+      */
     protected function _renderFiltersBefore()
     {
         return \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection::_renderFiltersBefore();

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="ict_shopbybrand_maker" resource="default" engine="innodb" comment="Shopbybrand makers">
+        <column xsi:type="int" name="maker_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Maker ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Maker Name"/>
+        <column xsi:type="varchar" name="url_key" nullable="false" length="255" comment="Maker Url Key"/>
+        <column xsi:type="mediumtext" name="banner_text" nullable="true" comment="Banner Text"/>
+        <column xsi:type="varchar" name="avatar" nullable="true" length="255" comment="Maker Avatar"/>
+        <column xsi:type="varchar" name="logobanner" nullable="true" length="255" comment="Logo Banner"/>
+        <column xsi:type="int" name="is_active" padding="10" unsigned="false" nullable="false" default="1" comment="Is Maker Active"/>
+        <column xsi:type="int" name="is_featured" padding="10" unsigned="false" nullable="false" default="0" comment="Is Featured"/>
+        <column xsi:type="varchar" name="categories_ids" nullable="true" length="255" comment="Categories Ids"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="maker_id"/>
+        </constraint>
+    </table>
+
+    <table name="ict_shopbybrand_maker_store" resource="default" engine="innodb" comment="Maker To Store Link Table">
+        <column xsi:type="int" name="maker_id" padding="10" unsigned="true" nullable="false" comment="Maker ID"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" comment="Store ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="maker_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="ICT_SHOPBYBRAND_MAKER_STORE_MAKER_ID_ICT_SHOPBYBRAND_MAKER_MAKER_ID"
+                    table="ict_shopbybrand_maker_store" column="maker_id"
+                    referenceTable="ict_shopbybrand_maker" referenceColumn="maker_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="ICT_SHOPBYBRAND_MAKER_STORE_STORE_ID_STORE_STORE_ID"
+                    table="ict_shopbybrand_maker_store" column="store_id"
+                    referenceTable="store" referenceColumn="store_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="ICT_SHOPBYBRAND_MAKER_STORE_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+
+    <table name="ict_shopbybrand_maker_product" resource="default" engine="innodb" comment="Maker To product Link Table">
+        <column xsi:type="int" name="maker_id" padding="10" unsigned="true" nullable="false" comment="Maker ID"/>
+        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" comment="Product ID"/>
+        <column xsi:type="int" name="position" padding="10" unsigned="false" nullable="false" default="0" comment="Position"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="maker_id"/>
+            <column name="product_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="ICT_SHOPBYBRAND_MAKER_PRODUCT_MAKER_ID_ICT_SHOPBYBRAND_MAKER_MAKER_ID"
+                    table="ict_shopbybrand_maker_product" column="maker_id"
+                    referenceTable="ict_shopbybrand_maker" referenceColumn="maker_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="ICT_SHOPBYBRAND_MAKER_PRODUCT_PRODUCT_ID_CATALOG_PRODUCT_ENTITY_ENTITY_ID"
+                    table="ict_shopbybrand_maker_product" column="product_id"
+                    referenceTable="catalog_product_entity" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="ICT_SHOPBYBRAND_MAKER_PRODUCT_MAKER_ID_PRODUCT_ID">
+            <column name="maker_id"/>
+            <column name="product_id"/>
+        </constraint>
+        <index referenceId="ICT_SHOPBYBRAND_MAKER_PRODUCT_PRODUCT_ID" indexType="btree">
+            <column name="product_id"/>
+        </index>
+    </table>
+</schema>
